@@ -5,9 +5,10 @@ syslog/*
 # IDE Files
 /nbproject/
 .idea/*
-vendor/*
+#vendor/*
 upload/*
 uploads/*
+bin/*
 Logs/*
 tdlib-db/*
 tdlib-files/*

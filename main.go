@@ -3,7 +3,6 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/sqeven/tgbot/pkg"
 	"github.com/sqeven/tgbot/tdlib"
 	"log"
 	"net/url"
@@ -17,7 +16,7 @@ import (
 
 var (
 	client  *tdlib.Client
-	poolOne pkg.WorkPool
+	poolOne WorkPool
 )
 
 func main() {
@@ -26,7 +25,7 @@ func main() {
 
 	if runtime.GOOS != "windows" {
 
-		logs.SetLogger(logs.AdapterFile, `{"filename":"`+pkg.GetAppPath()+`/Logs/tg.log","level":3}`)
+		logs.SetLogger(logs.AdapterFile, `{"filename":"`+GetAppPath()+`/Logs/tg.log","level":3}`)
 
 	} else {
 
@@ -38,11 +37,10 @@ func main() {
 	tdlib.SetLogVerbosityLevel(1)
 	tdlib.SetFilePath("./Logs/errors.txt")
 
-	// Create new instance of client
-	lca := new(pkg.LuaCoreApiModule)
+	// Create new instance of client 793416-021de84fe4f1ac0361c333b0ba6198b6
 	client = tdlib.NewClient(tdlib.Config{
-		APIID:               "793416",
-		APIHash:             "021de84fe4f1ac0361c333b0ba6198b6",
+		APIID:               "1828536",
+		APIHash:             "ef0b1ff04cc58a37a63d39c335f404f1",
 		SystemLanguageCode:  "en",
 		DeviceModel:         "Server",
 		SystemVersion:       "1.0.0",
@@ -96,7 +94,6 @@ func main() {
 			}
 		} else if currentState.GetAuthorizationStateEnum() == tdlib.AuthorizationStateReadyType {
 			fmt.Println("Authorization Ready! Let's rock")
-			lca.Client = client
 			break
 		}
 	}
@@ -113,7 +110,7 @@ func main() {
 }
 func GetProxy() {
 	// 会一直维护的
-	body, _, _ := pkg.HttpRequest("GET", "http://129.204.103.68:58897/v1/TGProxys", nil, nil, nil)
+	body, _, _ := HttpRequest("GET", "http://129.204.103.68:58897/v1/TGProxys", nil, nil, nil)
 
 	if body != nil {
 
@@ -217,7 +214,6 @@ func GetMSG() {
 		// }
 		return true
 	}
-
 	// Here we can add a receiver to retreive any message type we want
 	// We like to get UpdateNewMessage events and with a specific FilterFunc
 	receiver := client.AddEventReceiver(&tdlib.UpdateNewMessage{}, eventFilter, 5)
@@ -234,7 +230,7 @@ func GetMSG() {
 			m["MsgType"] = "MessageText"
 			m["Content"] = msgText.Text.Text
 			//协程池执行lua插件
-			poolOne.Run(pkg.TGLuaVMRun, m)
+			poolOne.Run(TGLuaVMRun, m)
 
 		}
 
