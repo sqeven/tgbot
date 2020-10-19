@@ -1,3 +1,3 @@
-module tdlib
+module github.com/sqeven/tgbot/tdlib
 
-go 1.15
+go 1.14
