@@ -3,15 +3,13 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"github.com/gin-gonic/gin"
 	"github.com/sqeven/tgbot/tdlib"
 	"log"
 	"net/url"
-	"runtime"
 	"strconv"
 	"strings"
 	"time"
-
-	"github.com/astaxie/beego/logs"
 )
 
 var (
@@ -20,22 +18,20 @@ var (
 )
 
 func main() {
-
-	logs.SetLogger(logs.AdapterConsole, `{"level":8}`)
-
-	if runtime.GOOS != "windows" {
-
-		logs.SetLogger(logs.AdapterFile, `{"filename":"`+GetAppPath()+`/Logs/tg.log","level":3}`)
-
-	} else {
-
-		logs.SetLogger(logs.AdapterFile, `{"filename":"./Logs/tg.log","level":3}`)
-	}
 	//初始化go协程池
 	poolOne.InitPool(60)
-
 	tdlib.SetLogVerbosityLevel(1)
 	tdlib.SetFilePath("./Logs/errors.txt")
+	// API
+	gin.SetMode(gin.ReleaseMode)
+	router := gin.Default()
+
+	// PING请求
+	router.GET("/", func(c *gin.Context) {
+		c.JSON(200, gin.H{
+			"message": "tgbot ok",
+		})
+	})
 
 	// Create new instance of client 793416-021de84fe4f1ac0361c333b0ba6198b6
 	client = tdlib.NewClient(tdlib.Config{
@@ -100,6 +96,29 @@ func main() {
 
 	go GetMSG()
 	go CheckProxy()
+	// 请求API服务
+	router.POST("/api/send", func(c *gin.Context) {
+		msg := c.DefaultPostForm("msg", "tg bot pong")
+		cid := c.DefaultPostForm("cid", "-1001463662639")
+		ChatID, _ := strconv.ParseInt(cid, 10, 64)
+		log.Println("ChatID", ChatID)
+		inputMsgTxt := tdlib.NewInputMessageText(tdlib.NewFormattedText(msg, nil), true, false)
+		_, err := client.SendMessage(ChatID, 0, false, true, nil, inputMsgTxt)
+		if err != nil {
+			c.JSON(200, gin.H{
+				"code": 100,
+				"msg":  err,
+				"data": cid,
+			})
+		} else {
+			c.JSON(200, gin.H{
+				"code": 0,
+				"msg":  msg,
+				"data": cid,
+			})
+		}
+	})
+	go router.Run(":8008")
 	// rawUpdates gets all updates comming from tdlib
 	rawUpdates := client.GetRawUpdatesChannel(100)
 	for update := range rawUpdates {
