@@ -1,47 +1,36 @@
 # github.com/Arman92/go-tdlib v0.0.0-20200423222840-430aa563191c
 ## explicit
-github.com/Arman92/go-tdlib
 # github.com/astaxie/beego v1.12.2
 ## explicit
 github.com/astaxie/beego/logs
 # github.com/cjoudrey/gluahttp v0.0.0-20200626084403-ae897a63b78b
 ## explicit
 github.com/cjoudrey/gluahttp
-# github.com/panjf2000/gnet v1.3.0
+# github.com/go-sql-driver/mysql v1.5.0
+github.com/go-sql-driver/mysql
+# github.com/junhsieh/goexamples v0.0.0-20190721045834-1c67ae74caa6
 ## explicit
-github.com/panjf2000/gnet
-github.com/panjf2000/gnet/errors
-github.com/panjf2000/gnet/internal
-github.com/panjf2000/gnet/internal/logging
-github.com/panjf2000/gnet/internal/netpoll
-github.com/panjf2000/gnet/internal/reuseport
-github.com/panjf2000/gnet/pool/bytebuffer
-github.com/panjf2000/gnet/pool/ringbuffer
-github.com/panjf2000/gnet/ringbuffer
+github.com/junhsieh/goexamples/fieldbinding/fieldbinding
 # github.com/shiena/ansicolor v0.0.0-20151119151921-a422bbe96644
 github.com/shiena/ansicolor
-# github.com/valyala/bytebufferpool v1.0.0
-github.com/valyala/bytebufferpool
+# github.com/tengattack/gluasql v0.0.0-20181229041402-2e5ed630c4cf
+## explicit
+github.com/tengattack/gluasql/mysql
+github.com/tengattack/gluasql/util
 # github.com/yuin/gopher-lua v0.0.0-20200816102855-ee81675732da
 ## explicit
 github.com/yuin/gopher-lua
 github.com/yuin/gopher-lua/ast
 github.com/yuin/gopher-lua/parse
 github.com/yuin/gopher-lua/pm
-# go.uber.org/atomic v1.6.0
-go.uber.org/atomic
-# go.uber.org/multierr v1.5.0
-go.uber.org/multierr
-# go.uber.org/zap v1.15.0
-go.uber.org/zap
-go.uber.org/zap/buffer
-go.uber.org/zap/internal/bufferpool
-go.uber.org/zap/internal/color
-go.uber.org/zap/internal/exit
-go.uber.org/zap/zapcore
-# golang.org/x/sys v0.0.0-20200625212154-ddb9806d33ae
-golang.org/x/sys/internal/unsafeheader
-golang.org/x/sys/unix
+# gopkg.in/src-d/go-mysql-server.v0 v0.5.1
+## explicit
+# gopkg.in/src-d/go-vitess.v0 v0.1.0
+## explicit
+# labix.org/v2/mgo v0.0.0-20140701140051-000000000287
+## explicit
+# launchpad.net/gocheck v0.0.0-20140225173054-000000000087
+## explicit
 # layeh.com/gopher-luar v1.0.8
 ## explicit
 layeh.com/gopher-luar

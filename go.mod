@@ -3,7 +3,7 @@ module github.com/sqeven/tgbot
 go 1.14
 
 require (
-	github.com/Arman92/go-tdlib v0.0.0-20200423222840-430aa563191c
+	github.com/Arman92/go-tdlib v0.0.0-20200423222840-430aa563191c // indirect
 	github.com/astaxie/beego v1.12.2
 	github.com/cjoudrey/gluahttp v0.0.0-20200626084403-ae897a63b78b
 	github.com/junhsieh/goexamples v0.0.0-20190721045834-1c67ae74caa6 // indirect
